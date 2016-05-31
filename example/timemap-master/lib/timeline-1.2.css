@@ -3,7 +3,7 @@
     height:         1.5em; 
     border-left:    1px solid #aaa; 
     padding-left:   2px; 
-    color:          #aaa;
+    color:          #e31781;
 }
 
 .timeline-ether-marker-bottom-emphasized {
@@ -11,7 +11,7 @@
     height:         2em; 
     border-left:    1px solid #aaa; 
     padding-left:   2px; 
-    color:          black;
+    color:          #e31781;
 }
 
 .timeline-ether-marker-top {

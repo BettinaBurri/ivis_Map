@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>Basic Example</title>
+    <title>Gerda Steiner & Jörg Lenzlinger</title>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="../lib/jquery-1.6.2.min.js"></script>
     <script src="../../../lib/mxn/source/mxn.js?(googlev3)" type="text/javascript"></script>
@@ -51,16 +51,16 @@ $(function() {
                 options: {
                     items: [
                         {
-                          "start" : "1449",
-                          "end" : "1494-01-11",
+                          "start" : "2008",
+                          "end" : "2012",
                           "point" : {
-                              "lat" : 43.7717,
-                              "lon" : 11.2536
+                              "lat" : 36.3804099,
+                              "lon" : 140.4636194
                            },
-                          "title" : "Domenico Ghirlandaio",
+                          "title" : "The Lymphatic System",
                           "options" : {
                             // set the full HTML for the info window
-                            "infoHtml": "<div class='custominfostyle'><b>Domenico Ghirlandaio</b> was a visual artist of some sort.</div>"
+                            "infoHtml": "<div class='custominfostyle'><b>The Lymphatic System</b><br>Art Tower Mito, Japan 2012 <br><a href='https://vimeo.com/151761455'>Video</a><br><img src=\"../images/The Lymphatic System.jpg\"></div>"
                           }
                         },
                         {
@@ -110,7 +110,9 @@ $(function() {
 });
     </script>
     <link href="examples.css" type="text/css" rel="stylesheet"/>
-    <style>
+      <link href="../style/stylesheet.css" type="text/css" rel="stylesheet"/>
+
+      <style>
     div#timelinecontainer{ height: 300px; }
     div#mapcontainer{ height: 300px; }
     </style>
@@ -118,15 +120,15 @@ $(function() {
 
   <body>
     <div id="help">
-    <h1>Basic Example, Google Maps v3</h1>
-    This is the basic example using version 3 of the Google Maps API. This example demostrates how to set additional options on the map - in this case, a custom map style.
+    <h1>Gerda Steiner & Jörg Lenzlinger</h1>
+    Künstlerduo.
     </div>
     <div id="timemap">
+        <div id="mapcontainer">
+            <div id="map"></div>
+        </div>
         <div id="timelinecontainer">
           <div id="timeline"></div>
-        </div>
-        <div id="mapcontainer">
-          <div id="map"></div>
         </div>
     </div>
   </body>
