@@ -26,7 +26,7 @@ padding: 1em;
 
 div#timelinecontainer{
 width: 100%;
-height: 300px;
+height: 150px;
 }
 
 div#timeline{
@@ -38,7 +38,7 @@ div#timeline{
 
 div#mapcontainer {
  width: 100%;
- height: 300px;
+ height: 450px;
 }
 
 div#map {
