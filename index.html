@@ -74,6 +74,8 @@ $(function() {
             Timeline.DateTime.YEAR
         ]
     });
+    // See https://github.com/mapstraction/mxn/issues/253
+    tm.map.maps.googlev3.setOptions({zoomControl: true, panControl: true});
 
     // set the map to our custom style
     var gmap = tm.getNativeMap();
