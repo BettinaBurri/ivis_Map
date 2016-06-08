@@ -14,7 +14,70 @@
     <script type="text/javascript">
 
 var tm;
+var ausstellungenData = [];
+
+// First load the data
 $(function() {
+
+  var geocoder = new google.maps.Geocoder();
+
+  function codeAddress(address, resultObject) {
+    resultObject.done = false
+    resultObject.lat = -1
+    resultObject.lon = -1
+
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        resultObject.lat = results[0].geometry.location.lat()
+        resultObject.lon = results[0].geometry.location.lng()
+        // console.log(results[0].geometry.location);
+        console.log(address);
+        console.log(results[0].geometry.location.lat());
+        console.log(results[0].geometry.location.lng());
+        resultObject.done = true
+      } else {
+        console.log("Geocode for " + address + " was not successful for the following reason: " + status);
+      }
+    });
+  }
+
+  $.getJSON( "gerda-steiner.json", function( data ) {
+    var ausstellungen = data.elements.nodes.slice(0,20)
+    ausstellungenData = ausstellungen.filter(
+      function(item){
+        item = item.data
+        console.log("filter")
+        console.log(item)
+        return item["JAHR"] != "NULL"
+          && item["AUSST_ORT"] != ""
+          && item["AUSST_TITEL"] != ""
+      }).map(
+      function(item){
+        item = item.data
+        var location = {};
+        location.lat = 0
+        location.lon = 0
+        console.log("map")
+        console.log(item)
+        codeAddress("" + item["AUSST_INSTITUT"] + ", " + item["AUSST_ORT"], location);
+        return {
+          "start": String(item["JAHR"]),
+          "stop": String(item["JAHR"]+1),
+          "point": location,
+          "title" : item["AUSST_TITEL"],
+          "options": {
+            "infoHtml": "" + item["ZITAT"] + " <a href=\"" + item["NEBIS_URL"] + "\">Link</a>, Ort: "+ item["AUSST_INSTITUT"] + ", " + item["AUSST_ORT"]
+          }
+        }
+      })
+  });
+
+  // Now wait until data is loaded (could be more elegant, but whatever)
+  timeoutID = window.setTimeout(startRendering, 2000);
+});
+
+
+function startRendering() {
 
     // make a custom map style
     var styledMapType = new google.maps.StyledMapType([
@@ -41,7 +104,7 @@ $(function() {
         mapId: "map",               // Id of map div element (required)
         timelineId: "timeline",     // Id of timeline div element (required)
         options: {
-            eventIconPath: "../images/"
+            eventIconPath: "lib/images/"
         },
         datasets: [
             {
@@ -51,21 +114,26 @@ $(function() {
                 // note that the lines below are now the preferred syntax
                 type: "basic",
                 options: {
-                    items: [
-                        {
-                          "start" : "2008",
-                          "end" : "2012",
-                          "point" : {
-                              "lat" : 36.3804099,
-                              "lon" : 140.4636194
-                           },
-                          "title" : "The Lymphatic System",
-                          "options" : {
-                            // set the full HTML for the info window
-                            "infoHtml": "<div class='custominfostyle'><b>The Lymphatic System</b><br>Art Tower Mito, Japan 2012 <br><a href='https://vimeo.com/151761455' target='_blank'>Video</a><br><img src=\"images/lymphatic_system.jpg\"></div>"
-                          }
-                        }
-                    ]
+                    items: ausstellungenData.filter(function(item){
+                      // Filter out all the items that we couldn't retrieve
+                      // location data for.
+                      return item.point.done;
+                    })
+                    // [
+                    //     {
+                    //       "start" : "2008",
+                    //       "end" : "2012",
+                    //       "point" : {
+                    //           "lat" : 36.3804099,
+                    //           "lon" : 140.4636194
+                    //        },
+                    //       "title" : "The Lymphatic System",
+                    //       "options" : {
+                    //         // set the full HTML for the info window
+                    //         "infoHtml": "<div class='custominfostyle'><b>The Lymphatic System</b><br>Art Tower Mito, Japan 2012 <br><a href='https://vimeo.com/151761455' target='_blank'>Video</a><br><img src=\"images/lymphatic_system.jpg\"></div>"
+                    //       }
+                    //     }
+                    // ]
                 }
             }
         ],
@@ -81,7 +149,7 @@ $(function() {
     var gmap = tm.getNativeMap();
     gmap.mapTypes.set("white", styledMapType);
     gmap.setMapTypeId("white");
-});
+}
     </script>
 
   </head>
