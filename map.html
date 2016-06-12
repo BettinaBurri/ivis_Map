@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<title>Gerda Steiner &amp; Jörg Lenzlinger</title>
+<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<script src="lib/jquery-1.6.2.min.js" type="text/javascript"></script>
+<script src="lib/mxn/source/mxn.js?(googlev3)"  type="text/javascript"></script>
+<script src="lib/timeline/timeline-1.2.js" type="text/javascript"></script>
+<script src="lib/timemap/timemap.js" type="text/javascript"></script>
+<link href="css/style.css" type="text/css" rel="stylesheet"/>
+
+<script type="text/javascript">
+
+    var tm;
+
+    // First load the data
+    $(function() {
+
+        $.getJSON( "data/GerdaSteiner_Ausstellung_AUSST_DATUM_AUSST_INSTITUT_COORDINATES.json", function( data ) {
+            var ausstellungen = data  //.slice(0,20)
+            ausstellungenData = ausstellungen.filter(
+                    function(item){
+                        return item.JAHR !== null
+                                && item.BISJAHR !== "NULL"
+                                && item.BISJAHR !== ""
+                                && item.AUSST_ORT !== ""
+                                && item.AUSST_TITEL !== ""
+
+                    }).map(
+                    function(item){
+                        var startyear = String(item.JAHR)
+                        var startmonth = ""
+                        if (item.MONAT !== null){
+                            startmonth += "-"
+                            startmonth += ("00" + String(item.MONAT)).slice(-"00".length)
+                        }
+                        var endyear = String(item.BISJAHR)
+                        var endmonth = ""
+                        if (item.BISMONAT !== "" && item.BISMONAT !== "NULL"){
+                            endmonth += "-"
+                            endmonth += ("00" + String(item.BISMONAT)).slice(-"00".length)
+                        }
+                        var returnval = {
+                            "start": startyear+startmonth,
+                            "stop": endyear+endmonth,
+                            "point": item.coordinates,
+                            "title" : String(item.AUSST_INSTITUT) + ", " +String(item.AUSST_TITEL),
+                            "options": {
+                                "infoHtml": String(item.AUSST_INSTITUT) + ", " + String(item.AUSST_TITEL) + ", "+ String(item.AUSST_ORT)
+                            }
+                        }
+                        return returnval
+                    })
+            startRendering(ausstellungenData)
+        });
+
+    });
+
+
+    function startRendering(data) {
+
+        // make a custom map style
+        var styledMapType = new google.maps.StyledMapType([
+            {
+                featureType: "water",
+                elementType: "all",
+                stylers: [
+                    { saturation: 0 },
+                    { lightness: 100 }
+                ]
+            },
+            {
+                featureType: "all",
+                elementType: "all",
+                stylers: [
+                    { saturation: -100 }
+                ]
+            }
+        ], {
+            name: "white"
+        });
+
+        tm = TimeMap.init({
+            mapId: "map",               // Id of map div element (required)
+            timelineId: "timeline",     // Id of timeline div element (required)
+            options: {
+                eventIconPath: "lib/images/"
+            },
+            datasets: [
+                {
+                    id: "artists",
+                    title: "Artists",
+                    theme: "orange",
+                    // note that the lines below are now the preferred syntax
+                    type: "basic",
+                    options: {
+                        items: data//.filter(function(item){
+                        // Filter out all the items that we couldn't retrieve
+                        // location data for.
+                        // console.log("start: " + item.start)
+                        // console.log("stop: " + item.stop)
+                        //  return item.coordinates.done
+                        //})
+                    }
+                }
+            ],
+            bandIntervals: [
+                Timeline.DateTime.MONTH,
+                Timeline.DateTime.YEAR
+            ]
+        });
+        // See https://github.com/mapstraction/mxn/issues/253
+        tm.map.maps.googlev3.setOptions({zoomControl: true, panControl: true});
+
+        // set the map to our custom style
+        var gmap = tm.getNativeMap();
+        gmap.mapTypes.set("white", styledMapType);
+        gmap.setMapTypeId("white");
+    }
+</script>
+
+  </head>
+
+  <body>
+  <div id="sikartWrap">
+      <div id="sikartHead">
+        <img src="sikartWrap/sikartHeadBig.jpg" width="942px" alt="SIKART"/>
+      </div>
+      <div id="sikartContent">
+
+          <div class="formStyle">
+              <form method="post" action="index.html">
+                  <p>
+                      <button class="newSearch">Neue Suche</button>
+                  </p>
+              </form>
+          <div id="mapSearchHead">
+              <h1>Gerda Steiner &amp; Jörg Lenzlinger</h1>
+              <h2>Künstlerduo.</h2>
+          </div>
+          <div id="timemap">
+              <div id="mapcontainer">
+                  <div id="map"></div>
+              </div>
+              <div id="timelinecontainer">
+                  <div id="timeline"></div>
+              </div>
+          </div>
+          </div>
+      </div>
+      <div id="sikartFooter">
+          <img src="sikartWrap/sikartFootBig.jpg" width=955 alt=""/>
+      </div>
+  </div>
+
+  </body>
+</html>

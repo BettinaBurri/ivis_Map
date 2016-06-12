@@ -1,12 +1,100 @@
-
-h1 {
- font-family: Arial;
-  color: #e31781;
-    font-size: x-large;
+#sikartWrap{
+    width: 932px;
+    margin: 0 auto; !important;
+    font-family: BlinkMacSystemFont, Verdana, Arial, sans-serif; !important;
+    border-color: #e31781;
+    color: #e31781;
+}
+#sikartHead{
+    width: 932px;
+    margin: 0;
 }
 
-div, p {
-font-family: Verdana, Arial, sans-serif;
+#sikartContent{
+    width: 902px;
+    margin: 0 0 0 18px;
+}
+
+#sikartFooter{
+    width: 932px;
+    margin: 0 0 0 -10px;
+}
+#mapSearchHead{
+    margin: 0 0 0 15px;
+}
+#sikartContent form{
+
+}
+#sikartContent #mapSearchHead{}
+
+#sikartContent .formStyle{
+    box-sizing: border-box;
+    position: relative;
+    font-size: small;
+    margin: 0 8px 20px 13px;
+    /*padding: 2em 0 2em 0;*/
+    padding:0 0 1.2em 0;
+    border-bottom: dotted;
+    border-top: dotted;
+    border-width: 0.1em;
+}
+#sikartContent label{
+    width: 14em;
+    display: block;
+    float: left;
+    text-align: right;
+    margin-right: 1em;
+    font-size: 1.4em;
+    font-weight: 200;
+}
+#sikartContent button{
+    position: absolute;
+    display: block;
+    right: 15px;
+    bottom: 20px;
+    width: 200px;
+    height: 25px;
+    background-color: #e31781;
+    border: none;
+    color: white;
+    font-weight: 400;
+    font-size: 1.3em;
+}
+
+
+#sikartContent button.newSearch{
+    position: absolute;
+    display: block;
+    top: 25px;
+    right: 15px;
+}
+
+
+#sikartContent button:hover, #sikartContent button.newSearch:hover{
+    background-color: #E3419D;
+    cursor: hand;
+}
+
+#sikartContent input{
+    width: 350px;
+    height: 25px;
+    border-color: #e31781;
+    border-style: dashed;
+    border-width: 1px;
+    font-size: 1.3em;
+    font-weight: 200;
+    color: #e31781;
+}
+
+h1,h2,h3,h4 {
+}
+h1 {
+    font-size: x-large;
+}
+h2 {
+    font-size: medium;
+    font-style: italic;
+    margin: -15px 0 0 0;
 }
 
 p.content {
@@ -21,7 +109,7 @@ padding: 1em;
 }
 
 div#timemap {
-padding: 1em;
+padding: 0.3em 0.3em 0 0.3em;
 }
 
 div#timelinecontainer{
@@ -38,7 +126,7 @@ div#timeline{
 
 div#mapcontainer {
  width: 100%;
- height: 450px;
+ height: 400px;
 }
 
 div#map {

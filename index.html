@@ -124,17 +124,35 @@ function startRendering(data) {
   </head>
 
   <body>
-    <div id="help">
-    <h1>Gerda Steiner &amp; Jörg Lenzlinger</h1>
-    Künstlerduo.
-    </div>
-    <div id="timemap">
-        <div id="mapcontainer">
-            <div id="map"></div>
-        </div>
-        <div id="timelinecontainer">
-          <div id="timeline"></div>
-        </div>
-    </div>
+  <div id="sikartWrap">
+      <div id="sikartHead">
+          <img src="sikartWrap/sikartHeadBig.jpg" width="942px" alt="SIKART"/>
+      </div>
+      <div id="sikartContent">
+
+          <div class="formStyle">
+              <form method="GET" action="map.html">
+                  <p>
+                      <label for="artist">Künstler/Künstlerin:</label>
+                      <input id="artist" name="artist" placeholder="Gerda Steiner & Jörg Lenzlinger">
+
+                  </p>
+                  <p>
+                      <label for="catchword">Stichwort:</label>
+                      <input id="catchword" name="catchword" placeholder="Künstlerduo">
+
+                  </p>
+                  <p>
+                      <button>Starten</button>
+                  </p>
+              </form>
+              <div style="height: 35px; width: 1px;"></div>
+          </div>
+      </div>
+      <div id="sikartFooter">
+          <img src="sikartWrap/sikartFootBig.jpg" width="955px" alt=""/>
+      </div>
+  </div>
+
   </body>
 </html>
