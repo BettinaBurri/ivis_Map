@@ -46,7 +46,7 @@ $(function() {
     //https://maps.google.com/maps/api/geocode/json?address=Kunsthaus,%20Z%C3%BCrich
   }
 
-  console.log($.getJSON( "data/GerdaSteiner_Ausstellung_AUSST_DATUM.json", function( data ) {
+  console.log($.getJSON( "data/GerdaSteiner_Ausstellung_AUSST_DATUM_AUSST_INSTITUT.json", function( data ) {
     window.rawdata = data;
     window.counter = 0
     window.amount = 3;
@@ -68,7 +68,7 @@ $(function() {
           var location = {};
           location.lat = 0
           location.lon = 0
-          codeAddress("" + item["AUSST_ORT"], location);
+          codeAddress("" + item.AUSST_ORT + ", " + item.AUSST_INSTITUT, location)
           item.coordinates = location
           delete item["N/A"]
           return item

@@ -144,8 +144,8 @@
 		"AUSST_INSTITUT" : "",
 		"AUSST_INST_URL" : "www.stiftsbibliothek.ch",
 		"AUSST_DATUM" : "",
-		"MONAT" : NULL,
-		"JAHR" : NULL,
+		"MONAT" : null,
+		"JAHR" : null,
 		"BISMONAT" : "",
 		"BISJAHR" : ""
 	},
@@ -789,7 +789,7 @@
 		"AUSST_INSTITUT" : "Biennale di Venezia",
 		"AUSST_INST_URL" : "www.labiennale.org",
 		"AUSST_DATUM" : "2000-2000",
-		"MONAT" : NULL,
+		"MONAT" : null,
 		"JAHR" : 2000,
 		"BISMONAT" : "",
 		"BISJAHR" : "2000"
@@ -879,7 +879,7 @@
 		"AUSST_INSTITUT" : "Echigo-Tsumari Satoyama Museum of Contemporary Art, Kinare",
 		"AUSST_INST_URL" : "",
 		"AUSST_DATUM" : "2012",
-		"MONAT" : NULL,
+		"MONAT" : null,
 		"JAHR" : 2012,
 		"BISMONAT" : "",
 		"BISJAHR" : ""
@@ -939,7 +939,7 @@
 		"AUSST_INSTITUT" : "",
 		"AUSST_INST_URL" : "",
 		"AUSST_DATUM" : "2003",
-		"MONAT" : NULL,
+		"MONAT" : null,
 		"JAHR" : 2003,
 		"BISMONAT" : "",
 		"BISJAHR" : ""
@@ -954,7 +954,7 @@
 		"AUSST_INSTITUT" : "",
 		"AUSST_INST_URL" : "",
 		"AUSST_DATUM" : "2005",
-		"MONAT" : NULL,
+		"MONAT" : null,
 		"JAHR" : 2005,
 		"BISMONAT" : "",
 		"BISJAHR" : ""
@@ -969,7 +969,7 @@
 		"AUSST_INSTITUT" : "",
 		"AUSST_INST_URL" : "",
 		"AUSST_DATUM" : "1997",
-		"MONAT" : NULL,
+		"MONAT" : null,
 		"JAHR" : 1997,
 		"BISMONAT" : "",
 		"BISJAHR" : ""

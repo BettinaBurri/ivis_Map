@@ -14,12 +14,11 @@
     <script type="text/javascript">
 
 var tm;
-var ausstellungenData = [];
 
 // First load the data
 $(function() {
 
-  $.getJSON( "data/GerdaSteiner_Ausstellung_DATUM_COORDINATES.json", function( data ) {
+  $.getJSON( "data/GerdaSteiner_Ausstellung_AUSST_DATUM_AUSST_INSTITUT_COORDINATES.json", function( data ) {
     var ausstellungen = data  //.slice(0,20)
     ausstellungenData = ausstellungen.filter(
       function(item){
@@ -43,24 +42,24 @@ $(function() {
           endmonth += "-"
           endmonth += ("00" + String(item.BISMONAT)).slice(-"00".length)
         }
-
-        return {
+        var returnval = {
           "start": startyear+startmonth,
           "stop": endyear+endmonth,
           "point": item.coordinates,
-          "title" : String(item.AUSST_TITEL),
+          "title" : String(item.AUSST_INSTITUT) + ", " +String(item.AUSST_TITEL),
           "options": {
-            "infoHtml": String(item.AUSST_TITEL) + ", "+ String(item.AUSST_ORT)
+            "infoHtml": String(item.AUSST_INSTITUT) + ", " + String(item.AUSST_TITEL) + ", "+ String(item.AUSST_ORT)
           }
         }
+        return returnval
       })
-      startRendering()
+      startRendering(ausstellungenData)
   });
 
 });
 
 
-function startRendering() {
+function startRendering(data) {
 
     // make a custom map style
     var styledMapType = new google.maps.StyledMapType([
@@ -97,13 +96,13 @@ function startRendering() {
                 // note that the lines below are now the preferred syntax
                 type: "basic",
                 options: {
-                    items: ausstellungenData.filter(function(item){
+                    items: data//.filter(function(item){
                       // Filter out all the items that we couldn't retrieve
                       // location data for.
                       // console.log("start: " + item.start)
                       // console.log("stop: " + item.stop)
-                      return item.point.done;
-                    })
+                    //  return item.coordinates.done
+                    //})
                 }
             }
         ],
